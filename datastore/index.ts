@@ -12,5 +12,11 @@ export let db: Datastore
 
 export async function initDB() {
     // db = new InMemoryDatastore()
-    db = await new SqlDatastore().openDB()
+    try {
+        
+        db = await new SqlDatastore().openDB()
+        console.log(`Database opened`)
+    } catch (error) {
+        console.error(error)
+    }
 } 

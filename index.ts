@@ -4,6 +4,7 @@ import { createPost, getposts } from './handlers/postHandlers'
 import asyncHandler from 'express-async-handler'
 
 import postRoutes from './routes/post.routes'
+import userRoutes from './routes/user.routes'
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/not_found'
 import { initDB } from './datastore'
@@ -24,6 +25,7 @@ const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 app.use(requestLoggerMiddleware)
 
 app.use('/api/posts', asyncHandler(postRoutes))
+app.use('/api/users', asyncHandler(userRoutes))
 
 app.use(notFound)
 app.use(errorHandler)

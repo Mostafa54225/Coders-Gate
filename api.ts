@@ -37,5 +37,12 @@ export interface GetLikeResponse {likes: Like[]}
 
 
 // User APIs
-export type CreateUserRequest = Pick<User, 'email' | 'firstName' | 'lastName' | 'username' | 'password'>
+export type SignUpRequest = Pick<User, 'email' | 'firstName' | 'lastName' | 'username' | 'password'>
+export interface SignUpResponse {}
+export interface SignInRequest {
+    login: string
+    password: string
+}
+
+export type SignInResponse = Pick<User, 'email' |'firstName' | 'lastName' | 'username' | 'id'>
 export interface CreateUserResponse {}

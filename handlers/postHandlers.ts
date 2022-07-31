@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes"
 import { db } from "../datastore"
 import { ExpressHandler, Post } from "../types"
 import crypto from 'crypto'
-import { CreatePostRequest, CreatePostResponse, ListPostsRequest, ListPostsResponse } from "../api"
+import { CreatePostRequest, CreatePostResponse, DeletePostRequest, DeletePostResponse, ListPostsRequest, ListPostsResponse } from "../api"
 
 
 
