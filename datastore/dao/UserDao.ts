@@ -1,7 +1,7 @@
-import { User } from "../types";
+import { User } from "../../types";
 
 export interface UserDao {
-    createUser(user: User): void
-    getUserByEmail(email: string): User | undefined
-    getUserByUsername(username: string): User | undefined
+    createUser(user: User): Promise<void>
+    getUserByEmail(email: string): Promise<User | undefined>
+    getUserByUsername(username: string): Promise<User | undefined>
 }

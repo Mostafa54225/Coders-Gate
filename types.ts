@@ -1,3 +1,5 @@
+import { RequestHandler } from "express"
+
 export interface User {
     id: string,
     firstName: string,

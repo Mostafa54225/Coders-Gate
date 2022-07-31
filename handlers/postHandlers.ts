@@ -3,19 +3,15 @@ import { StatusCodes } from "http-status-codes"
 import { db } from "../datastore"
 import { ExpressHandler, Post } from "../types"
 import crypto from 'crypto'
+import { CreatePostRequest, CreatePostResponse, ListPostsRequest, ListPostsResponse } from "../api"
 
 
 
-type CreatePostRequest = Pick<Post, 'title' | 'url' | 'userId'>
+export const getposts: ExpressHandler<ListPostsRequest, ListPostsResponse> = async (req, res) => {
+    res.send({posts: await db.getPosts()})
+}  
 
-interface CreatePostResponse {}
-
-
-export const getposts: ExpressHandler<{}, {}> =  (req, res) => {
-    res.send({posts: db.getPosts()})
-}
-
-export const createPost: ExpressHandler<CreatePostRequest, CreatePostResponse> = (req, res) => {
+export const createPost: ExpressHandler<CreatePostRequest, CreatePostResponse> = async (req, res) => {
     if(!req.body.title || !req.body.url || !req.body.userId) {
         return res.sendStatus(StatusCodes.BAD_REQUEST)
     }
@@ -27,6 +23,6 @@ export const createPost: ExpressHandler<CreatePostRequest, CreatePostResponse> =
         url: req.body.url,
         userId: req.body.userId
     }
-    db.createPost(post)
+    await db.createPost(post)
     res.sendStatus(StatusCodes.CREATED)
 }

@@ -1,8 +1,8 @@
-import { Post } from "../types";
+import { Post } from "../../types";
 
 export interface PostDao {
-    getPosts(): Post[]
-    createPost(post: Post): void
-    getPost(id: string): Post | undefined
-    deletePost(id: string): void
+    getPosts(): Promise<Post[]>
+    createPost(post: Post): Promise<void>
+    getPost(id: string): Promise<Post | undefined>
+    deletePost(id: string): Promise<void>
 }
