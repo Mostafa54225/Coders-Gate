@@ -36,14 +36,15 @@ npm install && npm start
 
 
 ## API Docs
-<strong>Public Routes</strong>
+> Public Routes
 
 **Auth**
 - Signup          - POST        /api/v1/signup
 - Signin          - POST        /api/v1/singin
 - Logout          - POST        /api/v1/logout
 
-<strong>Private Routes (Authentication required)</strong>
+> Private Routes (Authentication required)
+
 
 **users**
 - Get Users       - GET         /api/v1/users
@@ -62,7 +63,7 @@ npm install && npm start
 - Create Like     - POST        /api/v1/likes/:postId
 - Get Likes       - GET         /api/v1/likes/:postId
 
-<strong>Private Routes (Authentication and Authorization required)</strong>
+> Private Routes (Authentication and Authorization required)
 
 **users**
 - Update User     - PATCH       /api/v1/users/:userId
