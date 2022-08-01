@@ -50,6 +50,7 @@ npm install && npm start
 ```
 
 > Private Routes (Authentication required)
+
 **users**
 ```
 
@@ -77,6 +78,7 @@ npm install && npm start
 ```
 
 > Private Routes (Authentication and Authorization required)
+
 **users**
 
 ```
