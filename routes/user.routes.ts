@@ -1,9 +1,10 @@
 import express from 'express'
-import { getUserById, getUsers } from '../handlers/userHandler'
+import { getUserById, getUsers, updateUser } from '../handlers/userHandler'
+import { verifyUser } from '../middleware/authMiddleware'
 const router = express.Router()
 
 
 router.get('/', getUsers)
-router.get('/:id', getUserById)
+router.route('/:userId').get(getUserById).patch(verifyUser, updateUser)
 
 export default router

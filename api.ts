@@ -10,8 +10,14 @@ export interface ListPostsResponse {
 
 export type CreatePostRequest = Pick<Post, 'title' | 'url' | 'userId'>
 export interface CreatePostResponse {}
-export interface DeletePostRequest {postId: string}
-export interface DeletePostResponse {}
+export interface DeletePostRequest {}
+export interface DeletePostResponse {
+    message: string
+}
+export type UpdatePostRequest = Pick<Post, 'title' | 'url'>
+export interface UpdatePostResponse {
+    message: string
+}
 export interface GetPostRequest {}
 export interface GetPostResponse {
     post: Post
@@ -57,11 +63,15 @@ export interface GetUsersResponse {
     users: User[]
 }
 
-export interface GetUserByIDRequest {
-    id: string
-}
+export interface GetUserByIdRequest {}
 export interface GetUserByIdResponse {
     user: User
+}
+
+export type UpdateUserRequest = Pick<User, 'email' |'firstName' | 'lastName' | 'username' | 'password'>
+
+export interface UpdateUserResponse {
+    message: string
 }
 
 

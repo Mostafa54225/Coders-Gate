@@ -33,7 +33,7 @@ export interface Comment {
 type withError<T> = T & {error: string}
 
 export type ExpressHandler<Req, Res> = RequestHandler<
-    string,
+    any,
     Partial<withError<Res>>,
     Partial<Req>,
     any

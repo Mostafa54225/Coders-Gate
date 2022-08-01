@@ -21,3 +21,13 @@ export const authMiddleware: ExpressHandler<any, any> = async (req, res, next) =
         return res.status(StatusCodes.UNAUTHORIZED).send({error: 'Invalid token'})
     }
 }
+
+export const verifyUser: ExpressHandler<any, any> = async (req, res, next) => {
+    const userId = res.locals.userId
+    console.log(userId)
+    console.log(req.params.userId)
+    if(userId !== req.params.userId) {
+        return res.status(StatusCodes.UNAUTHORIZED).send({error: 'Unauthorized'})
+    }
+    next()
+}
