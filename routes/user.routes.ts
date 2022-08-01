@@ -1,8 +1,9 @@
 import express from 'express'
-import { signIn, signUp } from '../handlers/userHandler'
+import { getUserById, getUsers } from '../handlers/userHandler'
 const router = express.Router()
 
-router.post('/signup', signUp)
-router.post('/signin', signIn)
+
+router.get('/', getUsers)
+router.get('/:id', getUserById)
 
 export default router

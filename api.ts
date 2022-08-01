@@ -1,4 +1,4 @@
-import { Comment, Post, Like, User } from "./types";
+import { Comment, Post, Like, User, JwtObject } from "./types";
 
 
 
@@ -36,13 +36,32 @@ export interface GetLikeRequest {}
 export interface GetLikeResponse {likes: Like[]}
 
 
-// User APIs
+// Auth APIs
 export type SignUpRequest = Pick<User, 'email' | 'firstName' | 'lastName' | 'username' | 'password'>
-export interface SignUpResponse {}
+export interface SignUpResponse {
+    jwt: string
+}
 export interface SignInRequest {
     login: string
     password: string
 }
 
-export type SignInResponse = Pick<User, 'email' |'firstName' | 'lastName' | 'username' | 'id'>
-export interface CreateUserResponse {}
+export type SignInResponse = {
+    user: Pick<User, 'email' |'firstName' | 'lastName' | 'username' | 'id'>
+    jwt: string
+}
+
+// User APIs
+export interface GetUsersRequest {}
+export interface GetUsersResponse {
+    users: User[]
+}
+
+export interface GetUserByIDRequest {
+    id: string
+}
+export interface GetUserByIdResponse {
+    user: User
+}
+
+

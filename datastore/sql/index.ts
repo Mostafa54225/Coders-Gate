@@ -6,6 +6,8 @@ import { User, Post, Comment, Like } from "../../types";
 
 export class SqlDatastore implements Datastore {
 
+
+
     private db!: Database<sqlite3.Database, sqlite3.Statement>
     public async openDB() {
         this.db = await sqliteOpen({
@@ -31,6 +33,14 @@ export class SqlDatastore implements Datastore {
         )
     }
     
+    async getUsers(): Promise<User[] | undefined> {
+        return this.db.all<User[]>('SELECT * FROM users')
+    }
+
+    async getUserById(id: string): Promise<User | undefined> {
+        return this.db.get<User>('SELECT * FROM users WHERE id = ?', id)
+    }
+
     async getUserByEmail(email: string): Promise<User | undefined> {
         return await this.db.get<User>('SELECT * FROM users WHERE email = ?', email)
     }

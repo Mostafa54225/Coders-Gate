@@ -12,7 +12,7 @@ export const getposts: ExpressHandler<ListPostsRequest, ListPostsResponse> = asy
 }  
 
 export const createPost: ExpressHandler<CreatePostRequest, CreatePostResponse> = async (req, res) => {
-    if(!req.body.title || !req.body.url || !req.body.userId) {
+    if(!req.body.title || !req.body.url) {
         return res.sendStatus(StatusCodes.BAD_REQUEST)
     }
 
@@ -21,7 +21,7 @@ export const createPost: ExpressHandler<CreatePostRequest, CreatePostResponse> =
         postedAt: Date.now(),
         title: req.body.title,
         url: req.body.url,
-        userId: req.body.userId
+        userId: res.locals.userId
     }
     await db.createPost(post)
     res.sendStatus(StatusCodes.CREATED)

@@ -1,13 +1,15 @@
-import express, { ErrorRequestHandler, RequestHandler } from 'express'
+import express, { RequestHandler } from 'express'
 import dotenv from 'dotenv'
-import { createPost, getposts } from './handlers/postHandlers'
 import asyncHandler from 'express-async-handler'
-
+import cookieParser from 'cookie-parser'
 import postRoutes from './routes/post.routes'
+import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/not_found'
 import { initDB } from './datastore'
+import { requestLoggerMiddleware } from './middleware/logger'
+import { authMiddleware } from './middleware/authMiddleware'
 
 dotenv.config()
 
@@ -15,17 +17,17 @@ const port = process.env.PORT || 5000
 
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 
-
-const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
-    console.log(`${req.method} ${req.path} ${JSON.stringify(req.body)}`)
-    next()
-}
 
 app.use(requestLoggerMiddleware)
 
-app.use('/api/posts', asyncHandler(postRoutes))
-app.use('/api/users', asyncHandler(userRoutes))
+app.use('/api/v1/auth', asyncHandler(authRoutes))
+
+app.use(authMiddleware)
+
+app.use('/api/v1/users', asyncHandler(userRoutes))
+app.use('/api/v1/posts', asyncHandler(postRoutes))
 
 app.use(notFound)
 app.use(errorHandler)
