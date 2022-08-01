@@ -96,3 +96,7 @@ npm install && npm start
 - Delete Comment     - DELETE      /api/v1/comments/:commentId
 - Update Comment     - PATCH       /api/v1/comments/:commentId
 ```
+
+
+## Resource
+thank to youtube channel [Solid Code - Pramga](https://www.youtube.com/c/pragma-ar) for this course
