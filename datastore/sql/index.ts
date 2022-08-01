@@ -23,6 +23,7 @@ export class SqlDatastore implements Datastore {
         return this
     }
 
+    // User
     async createUser(user: User): Promise<void> {
         await this.db.run('INSERT INTO users (id, email, firstName, lastName, username, password) VALUES (?,?,?,?,?,?)', 
             user.id, 
@@ -53,6 +54,8 @@ export class SqlDatastore implements Datastore {
         await this.db.run('UPDATE users SET email = ?, firstName = ?, lastName = ?, username = ?, password = ? WHERE id = ?'
         ,user.email, user.firstName, user.lastName, user.username, user.password, id)
     }
+
+    // Posts
     async getPosts(): Promise<Post[]> {
         return await this.db.all<Post[]>('SELECT * FROM posts')
     }
@@ -70,15 +73,30 @@ export class SqlDatastore implements Datastore {
     async deletePost(id: string): Promise<void> {
         await this.db.run('DELETE FROM posts WHERE id = ?', id)
     }
-    getComments(postId: string): Promise<Comment[]> {
-        throw new Error("Method not implemented.");
+
+    // Comment
+    async getComments(postId: string): Promise<Comment[]> {
+        return await this.db.all<Comment[]>('SELECT * FROM comments WHERE postId = ?', postId)
     }
-    createComment(comment: Comment): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async getComment(commentId: string): Promise<Comment> {
+        return await this.db.get<Comment>('SELECT * FROM comments WHERE id = ?', commentId) as Comment
     }
-    deleteComment(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async createComment(comment: Comment): Promise<void> {
+        await this.db.run('INSERT INTO comments (id, userId, postId, comment, postedAt) VALUES (?,?,?,?,?)', comment.id, comment.userId, comment.postId, comment.comment, comment.postedAt)
     }
+
+    async updateComment(comment: Comment): Promise<void> {
+        await this.db.run('UPDATE comments SET comment = ? WHERE id = ?', comment.comment, comment.id)
+    }
+    async deleteComment(commentId: string): Promise<void> {
+        await this.db.run('DELETE FROM comments WHERE id = ?', commentId)
+    }
+
+    
+
+    // Likes
     createLike(like: Like): Promise<void> {
         throw new Error("Method not implemented.");
     }

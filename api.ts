@@ -25,12 +25,15 @@ export interface GetPostResponse {
 
 // Comment APIs
 
-export type CreateCommentRequest = Pick<Comment, 'postId' | 'comment'>
+export type CreateCommentRequest = Pick<Comment, 'comment'>
 export interface CreateCommentResponse {}
 export interface DeleteCommentRequest {commentId: string}
 export interface DeleteCommentResponse {}
 export interface GetCommentRequest {}
-export interface GetCommentResponse {comments: Comment[]}
+export type GetCommentResponse =  {comments: Comment[], message: string}
+
+export interface UpdateCommentRequest {updatedComment: string}
+export interface UpdateCommentResponse {message: string}
 
 
 // Like APIs

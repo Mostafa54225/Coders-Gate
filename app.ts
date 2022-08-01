@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import postRoutes from './routes/post.routes'
 import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
+import commentRoutes from './routes/comment.routes'
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/not_found'
 import { initDB } from './datastore'
@@ -28,6 +29,7 @@ app.use(authMiddleware)
 
 app.use('/api/v1/users', asyncHandler(userRoutes))
 app.use('/api/v1/posts', asyncHandler(postRoutes))
+app.use('/api/v1/comments', asyncHandler(commentRoutes))
 
 app.use(notFound)
 app.use(errorHandler)
