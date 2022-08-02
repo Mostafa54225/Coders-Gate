@@ -42,7 +42,7 @@ export interface CreateLikeResponse {}
 export interface DeleteLikeRequest {likeId: string}
 export interface DeleteLikeResponse {}
 export interface GetLikeRequest {}
-export interface GetLikeResponse {likes: Like[]}
+export interface GetLikeResponse {likes: number}
 
 
 // Auth APIs
@@ -76,5 +76,4 @@ export type UpdateUserRequest = Pick<User, 'email' |'firstName' | 'lastName' | '
 export interface UpdateUserResponse {
     message: string
 }
-
 

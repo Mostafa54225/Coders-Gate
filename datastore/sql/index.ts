@@ -35,6 +35,8 @@ export class SqlDatastore implements Datastore {
         )
     }
     
+
+    // Users
     async getUsers(): Promise<User[] | undefined> {
         return this.db.all<User[]>('SELECT * FROM users')
     }
@@ -54,6 +56,7 @@ export class SqlDatastore implements Datastore {
         await this.db.run('UPDATE users SET email = ?, firstName = ?, lastName = ?, username = ?, password = ? WHERE id = ?'
         ,user.email, user.firstName, user.lastName, user.username, user.password, id)
     }
+
 
     // Posts
     async getPosts(): Promise<Post[]> {
@@ -97,8 +100,12 @@ export class SqlDatastore implements Datastore {
     
 
     // Likes
-    createLike(like: Like): Promise<void> {
-        throw new Error("Method not implemented.");
+    async createLike(like: Like): Promise<void> {
+        await this.db.run('INSERT INTO likes (userId, postId) VALUES (?,?)', like.userId, like.postId)
+    }
+
+    async getLikesByPostId(postId: string): Promise<Like[]> {
+        return await this.db.all<Like[]>('SELECT * FROM likes WHERE postId = ?', postId)
     }
 
 }
