@@ -60,5 +60,8 @@ export const signIn: ExpressHandler<SignInRequest, SignInResponse> = async (req,
         }, 
         jwt
     })
+}
 
+export const logout: ExpressHandler<any, any> = async (req, res) => {
+    return res.clearCookie('access_token').sendStatus(StatusCodes.OK)
 }
